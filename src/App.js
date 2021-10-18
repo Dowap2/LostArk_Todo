@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import axios from "axios";
 import cheerio from "cheerio";
+import { useState } from "react";
 
 async function getHTML() {
   const characterName = "스태프로꽝";
@@ -14,42 +15,25 @@ async function getHTML() {
   }
 }
 
-getHTML()
-  .then(html => {
-    let titleList = [];
-    const $ = cheerio.load(html.data);
-    const bodyList = $("div.level-info2__expedition");
-
-    bodyList.each(function(i, elem) {
-      titleList[i] = {
-        title: $(this)
-          .find("span")
-          .text()
-      };
-    });
-    return titleList;
-  })
-  .then(res => console.log(res));
-
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [level, setLevel] = useState(0);
+  getHTML()
+    .then(html => {
+      let titleList = [];
+      const $ = cheerio.load(html.data);
+      const bodyList = $("div.level-info2__expedition");
+
+      bodyList.each(function(i, elem) {
+        titleList[i] = {
+          level: $(this)
+            .find("span")
+            .text()
+        };
+      });
+      return titleList;
+    })
+    .then(res => setLevel(res[0].level));
+  return <div className="App">{level}</div>;
 }
 
 export default App;
