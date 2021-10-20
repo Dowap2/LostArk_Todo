@@ -7,13 +7,14 @@ const lv1325 = ["아이라의눈", "오레하 프라바사"];
 const lv1370 = ["아르고스"];
 const lv1385 = ["쿠크세이튼리허설"];
 const lv1415 = ["발탄"];
-const lv1430 = ["아브렐슈드 데자뷰", "비아키스"];
+const lv1430 = ["아브렐슈드데자뷰", "비아키스"];
 
 function App() {
   const [level, setLevel] = useState(0);
   const [character, setCharacter] = useState("");
   const [characterName, setCharacterName] = useState("");
   const [content, setContent] = useState([]);
+  const [contentToCheckBox, setContentToCheckBox] = useState([]);
 
   useEffect(() => {
     if (characterName !== "") {
@@ -69,6 +70,18 @@ function App() {
     };
   }, [characterName]);
 
+  useEffect(() => {
+    const html = content.map(content => {
+      return (
+        <div>
+          <label>{content}</label>
+          <input type="checkbox"></input>
+        </div>
+      );
+    });
+    setContentToCheckBox(html);
+  }, [content]);
+
   return (
     <div className="App">
       <input type="text" onChange={e => setCharacter(e.target.value)}></input>
@@ -76,7 +89,7 @@ function App() {
       Lv.{level}
       <button onClick={e => console.log(content)}></button>
       <button onClick={e => setContent([])}></button>
-      <div>{content}</div>
+      <div>{contentToCheckBox}</div>
     </div>
   );
 }
