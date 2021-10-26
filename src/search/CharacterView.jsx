@@ -1,8 +1,36 @@
 import styled from "styled-components";
+import arcana from "../Img/arcana.png";
+import bard from "../Img/bard.png";
+import battlemaster from "../Img/battlemaster.png";
+import berserker from "../Img/berserker.png";
+import blade from "../Img/blade.png";
+import blaster from "../Img/blaster.png";
+import demonic from "../Img/demonic.png";
+import destroyer from "../Img/destroyer.png";
+import gunslinger from "../Img/gunslinger.png";
+import holyknight from "../Img/holyknight.png";
+import infighter from "../Img/infighter.png";
+import lancemaster from "../Img/lancemaster.png";
+import reaper from "../Img/reaper.png";
+import scouter from "../Img/scouter.png";
+import soulmaster from "../Img/soulmaster.png";
+import sorceress from "../Img/sorceress.png";
+import striker from "../Img/striker.png";
+import summoner from "../Img/summoner.png";
+import warlord from "../Img/warlord.png";
 
-const TitleComponent = styled.div``;
-const DetailInfoComponent = styled.div``;
-const DetailInfoText = styled.div`
+import { useState, useEffect } from "react";
+
+const CharacterViewComponent = styled.div`
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+`;
+
+const DetailInfoComponent = styled.div`
+  width: 300px;
+`;
+const DetailInfoBox = styled.div`
   display: flex;
   margin-bottom: 10px;
 `;
@@ -16,36 +44,139 @@ const DetailInfoTag = styled.div`
   border-radius: 30px;
   font-size: 14px;
 `;
+const DetailInfoText = styled.div`
+  padding: 10px;
+`;
+const EnrollmentButton = styled.button`
+  width: 100%;
+  height: 40px;
+  border: 0;
+  border-radius: 20px;
+  color: #ffffff;
+  background: #4a5b8c;
+  margin-top: 100px;
+  cursor: pointer;
+`;
+const CharacterIllustrationComponent = styled.div``;
+const CharacterIllustration = styled.img``;
 
 const CharacterView = props => {
   const data = props.data;
-  return (
-    <div>
-      <TitleComponent>{data[0]}</TitleComponent>
+  const [imgSrc, setImgSrc] = useState();
+
+  useEffect(() => {
+    switch (data[3]) {
+      case "디스트로이어":
+        setImgSrc(destroyer);
+        break;
+      case "워로드":
+        setImgSrc(warlord);
+        break;
+      case "버서커":
+        setImgSrc(berserker);
+        break;
+      case "홀리나이트":
+        setImgSrc(holyknight);
+        break;
+      case "배틀마스터":
+        setImgSrc(battlemaster);
+        break;
+      case "인파이터":
+        setImgSrc(infighter);
+        break;
+      case "기공사":
+        setImgSrc(soulmaster);
+        break;
+      case "창술사":
+        setImgSrc(lancemaster);
+        break;
+      case "스트라이커":
+        setImgSrc(striker);
+        break;
+      case "데빌헌터":
+        setImgSrc(striker);
+        break;
+      case "블래스터":
+        setImgSrc(blaster);
+        break;
+      case "호크아이":
+        setImgSrc(striker);
+        break;
+      case "스카우터":
+        setImgSrc(scouter);
+        break;
+      case "건슬링어":
+        setImgSrc(gunslinger);
+        break;
+      case "바드":
+        setImgSrc(bard);
+        break;
+      case "서머너":
+        setImgSrc(summoner);
+        break;
+      case "아르카나":
+        setImgSrc(arcana);
+        break;
+      case "소서리스":
+        setImgSrc(sorceress);
+        break;
+      case "블레이드":
+        setImgSrc(blade);
+        break;
+      case "데모닉":
+        setImgSrc(demonic);
+        break;
+      case "리퍼":
+        setImgSrc(reaper);
+        break;
+      default:
+        console.log("error");
+    }
+  }, [data]);
+
+  return data[0] !== undefined ? (
+    <CharacterViewComponent>
       <DetailInfoComponent>
-        <DetailInfoText>
-          <DetailInfoTag>서버</DetailInfoTag> {data[1]}
-        </DetailInfoText>
-        <DetailInfoText>
-          <DetailInfoTag>길드</DetailInfoTag> {data[2]}
-        </DetailInfoText>
-        <DetailInfoText>
-          <DetailInfoTag>클래스</DetailInfoTag> {data[3]}
-        </DetailInfoText>
-        <DetailInfoText>
-          <DetailInfoTag>전투레벨</DetailInfoTag> Lv.{data[5]}
-        </DetailInfoText>
-        <DetailInfoText>
-          <DetailInfoTag>아이템 레벨</DetailInfoTag> Lv.{data[6]}
-        </DetailInfoText>
-        <DetailInfoText>
-          <DetailInfoTag>원정대 레벨</DetailInfoTag> Lv.{data[7]}
-        </DetailInfoText>
-        <DetailInfoText>
-          <DetailInfoTag>영지</DetailInfoTag> {data[9]}
-        </DetailInfoText>
+        <DetailInfoBox>
+          <DetailInfoTag>캐릭터명</DetailInfoTag>
+          <DetailInfoText>{data[0]}</DetailInfoText>
+        </DetailInfoBox>
+        <DetailInfoBox>
+          <DetailInfoTag>서버</DetailInfoTag>
+          <DetailInfoText>{data[1]}</DetailInfoText>
+        </DetailInfoBox>
+        <DetailInfoBox>
+          <DetailInfoTag>길드</DetailInfoTag>
+          <DetailInfoText>{data[2]}</DetailInfoText>
+        </DetailInfoBox>
+        <DetailInfoBox>
+          <DetailInfoTag>클래스</DetailInfoTag>
+          <DetailInfoText>{data[3]}</DetailInfoText>
+        </DetailInfoBox>
+        <DetailInfoBox>
+          <DetailInfoTag>전투레벨</DetailInfoTag>
+          <DetailInfoText>Lv.{data[5]}</DetailInfoText>
+        </DetailInfoBox>
+        <DetailInfoBox>
+          <DetailInfoTag>아이템 레벨</DetailInfoTag>
+          <DetailInfoText>Lv.{data[6]}</DetailInfoText>
+        </DetailInfoBox>
+        <DetailInfoBox>
+          <DetailInfoTag>원정대 레벨</DetailInfoTag>
+          <DetailInfoText>Lv. {data[7]}</DetailInfoText>
+        </DetailInfoBox>
+        <DetailInfoBox>
+          <DetailInfoTag>영지</DetailInfoTag>
+          <DetailInfoText>{data[9]}</DetailInfoText>
+        </DetailInfoBox>
+        <EnrollmentButton>Enrollment</EnrollmentButton>
       </DetailInfoComponent>
-    </div>
+      <CharacterIllustrationComponent>
+        <CharacterIllustration src={imgSrc} />
+      </CharacterIllustrationComponent>
+    </CharacterViewComponent>
+  ) : (
+    <div>검색해주세요</div>
   );
 };
 

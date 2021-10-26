@@ -26,7 +26,6 @@ const InputContainer = styled.input`
   border: 0;
   padding-left: 10px;
 `;
-
 const SearchCharacter = () => {
   const [result, setResult] = useState([]);
   const [inputChracterName, setInputChracterName] = useState("");
@@ -50,7 +49,8 @@ const SearchCharacter = () => {
           bodyList.each(function(i) {
             titleList[i] = $(this)
               .find("span.text-theme-0")
-              .text();
+              .text()
+              .trim();
           });
           return titleList;
         })
@@ -74,7 +74,6 @@ const SearchCharacter = () => {
           />
         </InputComponent>
       </InputBackground>
-
       <CharacterView data={result} />
     </div>
   );
