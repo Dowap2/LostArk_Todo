@@ -20,6 +20,16 @@ import summoner from "../Img/summoner.png";
 import warlord from "../Img/warlord.png";
 
 import { useState, useEffect } from "react";
+import {
+  lvDefault,
+  lv1325,
+  lv1370,
+  lv1385,
+  lv1400,
+  lv1415,
+  lv1430,
+  lv1445
+} from "../content/ContentData";
 
 const CharacterViewComponent = styled.div`
   margin-top: 20px;
@@ -63,6 +73,7 @@ const CharacterIllustration = styled.img``;
 const CharacterView = props => {
   const data = props.data;
   const [imgSrc, setImgSrc] = useState();
+  const [content, setContent] = useState();
 
   useEffect(() => {
     switch (data[3]) {
@@ -169,7 +180,7 @@ const CharacterView = props => {
           <DetailInfoTag>영지</DetailInfoTag>
           <DetailInfoText>{data[9]}</DetailInfoText>
         </DetailInfoBox>
-        <EnrollmentButton>Enrollment</EnrollmentButton>
+        <EnrollmentButton>등록</EnrollmentButton>
       </DetailInfoComponent>
       <CharacterIllustrationComponent>
         <CharacterIllustration src={imgSrc} />
